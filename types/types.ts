@@ -47,7 +47,7 @@ export interface PotionInfoType {
 }
 
 export type PageType = {
-    searchParams: Promise<{ type: string }>
+    searchParams: { type: string }
 }
 
 export type MetadataParams = {
