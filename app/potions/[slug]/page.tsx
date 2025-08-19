@@ -3,7 +3,7 @@ import { fetchPotion } from "@/lib/github"
 import { notFound } from "next/navigation"
 import { MetadataParams } from "@/types/types"
 
-export const generateMetaData = async({ params }: MetadataParams) => {
+export const generateMetadata = async({ params }: MetadataParams) => {
     const { slug } = await params
 
     const [owner, repo] = slug.split("__")
