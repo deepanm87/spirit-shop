@@ -52,7 +52,7 @@ export async function fetchPotions() {
 }
 
 export async function fetchPotion(owner: string, repo:string) {
-    const url = `${GITHUB_API_URL}/repo/${owner}/${repo}`
+    const url = `${GITHUB_API_URL}/repos/${owner}/${repo}`
 
     const githubToken = process.env.GITHUB_TOKEN
 

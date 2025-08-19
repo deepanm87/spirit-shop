@@ -2,27 +2,23 @@ import {
   PotionHeader,
   PotionInfoCard,
   PotionStats,
-} from "@/components/potions/potion-common";
-import { Badge } from "@/components/ui/badge";
-import { PotionType } from "@/types/types";
-import { CalendarIcon, CodeIcon, GithubIcon, StarIcon } from "lucide-react";
-import Image from "next/image";
-
-interface PotionInfoType {
-  potion: PotionType;
-}
+} from "@/components/potions/potion-common"
+import { Badge } from "@/components/ui/badge"
+import { CalendarIcon, CodeIcon, GithubIcon, StarIcon } from "lucide-react"
+import { PotionInfoType } from "@/types/types"
+import Image from "next/image"
 
 export default function PotionInfo({ potion }: PotionInfoType) {
   const title = "Potion Details";
   const subTitle = "Discover the magical properties of this enchanted brew";
   const {
     name,
+    owner,
     description,
     stargazers_count,
     forks_count,
     potionEffect,
     topics,
-    
     language,
     updated_at,
     magicalType,
@@ -34,6 +30,8 @@ export default function PotionInfo({ potion }: PotionInfoType) {
     5,
     Math.max(1, Math.floor(stargazers_count / 50000))
   );
+
+  console.log(owner)
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -48,7 +46,7 @@ export default function PotionInfo({ potion }: PotionInfoType) {
           <div
             className={`p-6 rounded-2xl border border-magic-purple/20 h-full potion-${magicalType}`}
           >
-            <PotionHeader name={name} owner={name} size="medium" />
+            <PotionHeader name={name} owner={owner} size="medium" />
 
             <div className="space-y-4">
               <PotionInfoCard title="Effect">
@@ -89,7 +87,7 @@ export default function PotionInfo({ potion }: PotionInfoType) {
                 Repository Details
               </h2>
               <a
-                href={`https://github.com/${name}/${name}`}
+                href={`https://github.com/${owner.login}/${name}`}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-magic-pink hover:bg-magic-pink/80 transition-colors duration-300"
               >
                 <GithubIcon className="w-4 h-4 " />
@@ -103,13 +101,13 @@ export default function PotionInfo({ potion }: PotionInfoType) {
                 <div className="flex items-center gap-2">
                   <div className="relative overflow-hidden rounded-full ring-2 ring-purple-500/20 h-8 w-8">
                     <Image
-                      src={name}
-                      alt={name}
+                      src={owner.avatar_url}
+                      alt={owner.login}
                       fill
                       className="object-cover"
                     />
                   </div>
-                  <span>{name}</span>
+                  <span>{owner.login}</span>
                 </div>
               </PotionInfoCard>
               <PotionInfoCard title="Repository Name">

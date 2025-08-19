@@ -1,9 +1,5 @@
-import { PotionType } from "@/types/types";
-import { PotionCard } from "./potion-card";
-
-interface PotionGridProps {
-  potions: PotionType[];
-}
+import { PotionCard } from "./potion-card"
+import { PotionGridProps } from "@/types/types"
 
 export function PotionGrid({ potions }: PotionGridProps) {
   return (

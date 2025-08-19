@@ -16,6 +16,9 @@ export const PotionCard = ({
   stargazers_count,
   forks_count,
 }: PotionType) => {
+
+  
+
   return (
     <Link href={`/potions/${full_name.replace('/', '__')}`}>
       <Card
@@ -55,5 +58,5 @@ export const PotionCard = ({
         </CardContent>
       </Card>
     </Link>
-  );
-};
+  )
+}
