@@ -3,25 +3,25 @@ import { fetchPotion } from "@/lib/github"
 import { notFound } from "next/navigation"
 import { MetadataParams } from "@/types/types"
 
-export const generateMetadata = async({ params }: MetadataParams) => {
-    const { slug } = await params
+// export const generateMetadata = async({ params }: MetadataParams) => {
+//     const { slug } = await params
 
-    const [owner, repo] = slug.split("__")
+//     const [owner, repo] = slug.split("__")
 
-    const potion = await fetchPotion(owner, repo)
+//     const potion = await fetchPotion(owner, repo)
 
-    if (!potion) {
-        notFound()
-    }
+//     if (!potion) {
+//         notFound()
+//     }
 
-    return {
-        title: `{potion?.name}`,
-        description: potion?.description,
-        alternates: {
-            canonical: `/potions/${owner}__${repo}`
-        }
-    }
-}
+//     return {
+//         title: `{potion?.name}`,
+//         description: potion?.description,
+//         alternates: {
+//             canonical: `/potions/${owner}__${repo}`
+//         }
+//     }
+// }
 
 export async function generateStaticParams() {
     const popularRepos = [
