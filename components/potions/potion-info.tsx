@@ -22,6 +22,7 @@ export default function PotionInfo({ potion }: PotionInfoType) {
     forks_count,
     potionEffect,
     topics,
+    
     language,
     updated_at,
     magicalType,
