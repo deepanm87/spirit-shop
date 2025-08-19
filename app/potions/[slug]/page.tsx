@@ -1,57 +1,62 @@
-import PotionInfo from "@/components/potions/potion-info"
-import { fetchPotion } from "@/lib/github"
-import { notFound } from "next/navigation"
-import { MetadataParams } from "@/types/types"
+import PotionInfo from "@/components/potions/potion-info";
+import { fetchPotion } from "@/lib/github";
+import { notFound } from "next/navigation";
 
-export const generateMetadata = async({ params }: MetadataParams) => {
-    const { slug } = await params
+type MetadataParams = {
+  params: Promise<{ slug: string }>;
+};
 
-    const [owner, repo] = slug.split("__")
+export const generateMetadata = async ({ params }: MetadataParams) => {
+  const { slug } = await params;
 
-    const potion = await fetchPotion(owner, repo)
+  const [owner, repo] = slug.split("__");
 
-    if (!potion) {
-        notFound()
-    }
+  const potion = await fetchPotion(owner, repo);
 
-    return {
-        title: `${potion?.name}`,
-        description: potion?.description,
-        alternates: {
-            canonical: `/potions/${owner}__${repo}`
-        }
-    }
-}
+  if (!potion) {
+    notFound();
+  }
+
+  return {
+    title: `${potion?.name}`,
+    description: potion?.description,
+    alternates: {
+      canonical: `/potions/${owner}__${repo}`,
+    },
+  };
+};
 
 export async function generateStaticParams() {
-    const popularRepos = [
-        "facebook/react",
-        "tailwindlabs/tailwindcss",
-        "nodejs/node",
-        "vercel/next.js",
-        "typescript/TypeScript"
-    ]
-    return popularRepos.map( repo => ({
-        slug: repo.replace("/", "__")
-    }))
+  const popularRepos = [
+    "facebook/react",
+    "tailwindlabs/tailwindcss",
+    "nodejs/node",
+    "vercel/next.js",
+    "typescript/TypeScript",
+  ];
+  return popularRepos.map((repo) => ({
+    slug: repo.replace("/", "__"),
+  }));
 }
 
-export default async function PotionPage({ params }: { params: { slug: string }}) {
-    const { slug } = await params
+export default async function PotionPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
 
-    const [owner, repo] = slug.split("__")
+  const [owner, repo] = slug.split("__");
 
-    if(!owner || !repo) {
-        notFound()
-    }
+  if (!owner || !repo) {
+    notFound();
+  }
 
-    const potion = await fetchPotion(owner, repo)
+  const potion = await fetchPotion(owner, repo);
 
-    if (!potion) {
-        notFound()
-    }
+  if (!potion) {
+    notFound();
+  }
 
-    return (
-        <PotionInfo potion={potion} />
-    )
+  return <PotionInfo potion={potion} />;
 }
